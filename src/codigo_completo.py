@@ -164,6 +164,10 @@ def main():
     brush_thickness = 6
     desired_width = 1280  # baja a 640 si va lento
 
+    # FPS
+    prev_fps_t = time.time()
+    fps = 0.0
+
     def reset_to_sequence():
         nonlocal mode, canvas, ema_x, ema_y, prev_draw_point, hold_start_time, hold_target, current_color
         print("🔄 Reiniciando: volviendo a detección de secuencia…")
@@ -188,6 +192,13 @@ def main():
             ret, frame = cap.read()
             if not ret:
                 break
+
+            # FPS (cálculo simple por frame)
+            now_t = time.time()
+            dt = now_t - prev_fps_t
+            if dt > 0:
+                fps = 1.0 / dt
+            prev_fps_t = now_t
 
             frame = cv2.flip(frame, 1)
 
@@ -379,6 +390,18 @@ def main():
                 bg = cv2.bitwise_and(frame, frame, mask=mask_inv)
                 fg = cv2.bitwise_and(canvas, canvas, mask=mask)
                 out = cv2.add(bg, fg)
+
+            # FPS abajo a la derecha (único cambio pedido)
+            cv2.putText(
+                out,
+                f"FPS: {fps:.1f}",
+                (w - 160, h - 20),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.8,
+                (255, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
 
             cv2.imshow(title, out)
 

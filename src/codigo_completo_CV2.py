@@ -533,7 +533,6 @@ def main(cam_index=0, width=1280, height=720):
             paint_thickness = 3
 
         # ====== Grosor con + / - ======
-        # '+' suele ser 43, '-' 45. En algunos teclados '+' llega como '=' (61)
         elif key in (ord('+'), ord('=')):
             paint_thickness = min(max_th, paint_thickness + 1)
         elif key in (ord('-'), ord('_')):
