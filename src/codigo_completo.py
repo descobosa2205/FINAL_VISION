@@ -391,7 +391,7 @@ def main():
                 fg = cv2.bitwise_and(canvas, canvas, mask=mask)
                 out = cv2.add(bg, fg)
 
-            # FPS abajo a la derecha (único cambio pedido)
+            # FPS
             cv2.putText(
                 out,
                 f"FPS: {fps:.1f}",
