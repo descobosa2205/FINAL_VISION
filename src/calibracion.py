@@ -77,3 +77,5 @@ extrinsics = list(map(lambda rvec, tvec: np.hstack((cv2.Rodrigues(rvec)[0], tvec
 print("Intrinsics:\n", intrinsics)
 print("Distortion coefficients:\n", dist_coeffs)
 print("Root mean squared reprojection error:\n", rms)
+
+np.savez("calib.npz", K=intrinsics, dist=dist_coeffs)
