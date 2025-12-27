@@ -3,6 +3,11 @@ import cv2
 import time
 import mediapipe as mp
 
+
+import subprocess
+import sys
+import os
+
 # -----------------------------
 # Finger counting (MediaPipe)
 # -----------------------------
@@ -111,11 +116,19 @@ class ReverseSequenceDetector:
             self.stable = 0  # obliga a estabilizar el siguiente valor
 
             # ¿completado?
+
+            
+
             if self.idx >= len(self.sequence):
-                print("✅ Secuencia 5→4→3→2→1→0 detectada correctamente.")
+                # Ejecutar el programa finger_paint.py
+                subprocess.Popen(["python", "finger_paint.py"])
+
+                # Opcional: lógica previa de cooldown/reset si la necesitas
                 self.cooldown_until = now + self.cooldown_s
                 self.reset()
-                return True
+
+                # Cerrar el programa actual
+                sys.exit(0)
 
             return False
 
