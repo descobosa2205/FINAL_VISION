@@ -67,7 +67,7 @@ Lab_Project/
 	•	opencv-python
 	•	numpy
 	•	imageio
-	•	mediapipe (solo para la versión MediaPipe)
+	•	mediapipe (solo para la versión MediaPipe) -> Version: 0.10.21
 
 📦 Instalación de dependencias
 
